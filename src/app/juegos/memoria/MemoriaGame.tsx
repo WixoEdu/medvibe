@@ -5,8 +5,7 @@ import Link from "next/link";
 import { ALL_FLASHCARDS, TOPICS } from "@/content";
 import type { TopicId } from "@/types/content";
 import { sample, shuffle } from "@/lib/shuffle";
-import { useLocalStorage } from "@/lib/useLocalStorage";
-import { STORAGE_KEYS, EMPTY_GAME_SCORES, type GameScores } from "@/lib/storageKeys";
+import { useGameScores } from "@/lib/progress/useGameScores";
 import styles from "./memoria.module.css";
 
 const PAIR_COUNT = 6;
@@ -28,7 +27,8 @@ export default function MemoriaGame() {
   const [matchedPairIds, setMatchedPairIds] = useState<string[]>([]);
   const [moves, setMoves] = useState(0);
   const [busy, setBusy] = useState(false);
-  const [scores, setScores] = useLocalStorage<GameScores>(STORAGE_KEYS.gameScores, EMPTY_GAME_SCORES);
+  const { scores, addScore } = useGameScores();
+  const bestScore = scores.memoria.length > 0 ? Math.min(...scores.memoria) : undefined;
 
   const pool = useMemo(
     () => (topic === "todos" ? ALL_FLASHCARDS : ALL_FLASHCARDS.filter((f) => f.topicId === topic)),
@@ -70,12 +70,8 @@ export default function MemoriaGame() {
           setFlippedKeys([]);
           setBusy(false);
           if (nextMatched.length === tiles.length / 2) {
-            const best = scores.memoria[0];
-            if (best === undefined || moves + 1 < best) {
-              setScores((prev) => ({
-                ...prev,
-                memoria: [moves + 1, ...prev.memoria].sort((a, b) => a - b).slice(0, 5),
-              }));
+            if (bestScore === undefined || moves + 1 < bestScore) {
+              addScore("memoria", moves + 1);
             }
             setStage("done");
           }
@@ -88,8 +84,6 @@ export default function MemoriaGame() {
       }
     }
   }
-
-  const bestScore = scores.memoria[0];
 
   if (stage === "config") {
     return (

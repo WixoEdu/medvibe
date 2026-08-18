@@ -5,8 +5,7 @@ import Link from "next/link";
 import { ALL_QUESTIONS } from "@/content";
 import type { QuizQuestion } from "@/types/content";
 import { shuffle } from "@/lib/shuffle";
-import { useLocalStorage } from "@/lib/useLocalStorage";
-import { STORAGE_KEYS, EMPTY_GAME_SCORES, type GameScores } from "@/lib/storageKeys";
+import { useGameScores } from "@/lib/progress/useGameScores";
 import styles from "./contrarreloj.module.css";
 
 const STARTING_LIVES = 3;
@@ -23,7 +22,7 @@ export default function ContrarrelojGame() {
   const [secondsLeft, setSecondsLeft] = useState(SECONDS_PER_QUESTION);
   const [selected, setSelected] = useState<number | null>(null);
   const [locked, setLocked] = useState(false);
-  const [scores, setScores] = useLocalStorage<GameScores>(STORAGE_KEYS.gameScores, EMPTY_GAME_SCORES);
+  const { scores, addScore } = useGameScores();
 
   const current = queue[qIndex];
   const bestScore = useMemo(() => Math.max(0, ...scores.contrarreloj), [scores.contrarreloj]);
@@ -55,7 +54,7 @@ export default function ContrarrelojGame() {
 
   function endGame(finalScore: number) {
     if (finalScore > bestScore) {
-      setScores((prev) => ({ ...prev, contrarreloj: [finalScore, ...prev.contrarreloj].slice(0, 5) }));
+      addScore("contrarreloj", finalScore);
     }
     setStage("done");
   }
