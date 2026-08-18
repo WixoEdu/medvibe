@@ -1,0 +1,122 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.backLink {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  align-self: flex-start;
+}
+
+.heroHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  font-size: 2.2rem;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.weightBarTrack {
+  max-width: 320px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.weightBarFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.weightLabel {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.05rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.86rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.actionButton:hover {
+  background: var(--color-surface-alt);
+}
+
+.actionButtonPrimary {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.actionButtonPrimary:hover {
+  background: var(--color-primary-hover);
+}
+
+.section {
+  margin-top: 2.25rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.sectionLink {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.emptyNote {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}

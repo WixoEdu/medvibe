@@ -1,0 +1,68 @@
+import type { Flashcard } from "@/types/content";
+
+export const medicinaInternaFlashcards: Flashcard[] = [
+  {
+    id: "fc-mi-001",
+    topicId: "medicina-interna",
+    subtopic: "Cardiología",
+    front: "¿Cuáles son los criterios ECG de IAM con elevación del ST?",
+    back: "Elevación del ST ≥1 mm en 2 derivaciones contiguas de miembros, o ≥2 mm (hombres) / ≥1.5 mm (mujeres) en derivaciones precordiales, o bloqueo de rama izquierda nuevo con clínica compatible.",
+    source: { label: "Fourth Universal Definition of Myocardial Infarction, 2018" },
+  },
+  {
+    id: "fc-mi-002",
+    topicId: "medicina-interna",
+    subtopic: "Neumología",
+    front: "¿Qué significa cada letra de CURB-65?",
+    back: "Confusión, Urea (BUN) elevada, frecuencia Respiratoria ≥30, presión arterial Baja (<90/60), edad ≥65 años. Cada ítem suma 1 punto para estratificar gravedad de neumonía.",
+    source: { label: "BTS Guidelines for Community Acquired Pneumonia" },
+  },
+  {
+    id: "fc-mi-003",
+    topicId: "medicina-interna",
+    subtopic: "Endocrinología",
+    front: "¿Cuáles son los 4 criterios diagnósticos de diabetes mellitus?",
+    back: "1) Glucemia en ayunas ≥126 mg/dL; 2) Glucemia 2h en PTOG ≥200 mg/dL; 3) HbA1c ≥6.5%; 4) Glucemia al azar ≥200 mg/dL con síntomas clásicos. Se requiere confirmación con 2 pruebas si el paciente está asintomático.",
+    source: { label: "ADA — Standards of Care in Diabetes 2024" },
+  },
+  {
+    id: "fc-mi-004",
+    topicId: "medicina-interna",
+    subtopic: "Nefrología",
+    front: "¿Cómo se clasifica la ERC por TFG según KDIGO?",
+    back: "G1 ≥90, G2 60-89, G3a 45-59, G3b 30-44, G4 15-29, G5 <15 mL/min/1.73m². Se combina con categoría de albuminuria (A1, A2, A3) para el pronóstico completo.",
+    source: { label: "KDIGO Clinical Practice Guideline for CKD, 2024" },
+  },
+  {
+    id: "fc-mi-005",
+    topicId: "medicina-interna",
+    subtopic: "Infectología",
+    front: "¿Cuáles son los 3 componentes del qSOFA?",
+    back: "Frecuencia respiratoria ≥22/min, alteración del estado mental (Glasgow <15), presión arterial sistólica ≤100 mmHg. ≥2 puntos sugiere alto riesgo de mala evolución por sepsis.",
+    source: { label: "Surviving Sepsis Campaign, 2021" },
+  },
+  {
+    id: "fc-mi-006",
+    topicId: "medicina-interna",
+    subtopic: "Hematología",
+    front: "¿Qué diferencia a la anemia ferropénica de la anemia de enfermedad crónica en el perfil de hierro?",
+    back: "Ferropénica: ferritina baja, TIBC/transferrina alta, saturación de transferrina baja. Enfermedad crónica: ferritina normal/alta (reactante de fase aguda), TIBC baja o normal.",
+    source: { label: "Harrison's Principles of Internal Medicine, 21.ª ed." },
+  },
+  {
+    id: "fc-mi-007",
+    topicId: "medicina-interna",
+    subtopic: "Cardiología",
+    front: "¿Cuáles son las 4 clases funcionales NYHA?",
+    back: "I: sin limitación. II: limitación leve, síntomas con esfuerzo ordinario. III: limitación marcada, síntomas con esfuerzo menor al ordinario. IV: síntomas en reposo.",
+    source: { label: "New York Heart Association — Functional Classification" },
+  },
+  {
+    id: "fc-mi-008",
+    topicId: "medicina-interna",
+    subtopic: "Gastroenterología",
+    front: "¿Cuál es el manejo farmacológico inicial del sangrado variceal en cirrosis?",
+    back: "Vasoconstrictor esplácnico (octreótide o terlipresina) + antibiótico profiláctico (ej. ceftriaxona) + endoscopía terapéutica temprana (<12h), junto con reanimación hemodinámica restrictiva.",
+    source: { label: "AASLD Practice Guidance, 2023" },
+  },
+];
