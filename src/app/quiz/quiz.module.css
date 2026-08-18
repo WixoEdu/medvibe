@@ -1,0 +1,366 @@
+.pageHeader {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin-top: 0.35rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  max-width: 640px;
+  line-height: 1.5;
+}
+
+/* ---- Config ---- */
+.configCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fieldLabel {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.topicOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.topicOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.topicOptionActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pillButton {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.pillButtonActive {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+}
+
+.startButton {
+  align-self: flex-start;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: white;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.startButton:hover {
+  background: var(--color-primary-hover);
+}
+
+.startButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.warnText {
+  font-size: 0.8rem;
+  color: var(--color-danger);
+}
+
+/* ---- Session ---- */
+.sessionTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.progressText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  font-size: 0.85rem;
+}
+
+.timerLow {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.progressTrack {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.questionCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.questionMeta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.subtopicTag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.stem {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-align: left;
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+
+.optionLetter {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.78rem;
+}
+
+.optionSelected {
+  border-color: var(--color-accent);
+  background: var(--color-primary-soft);
+}
+
+.optionCorrect {
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.optionIncorrect {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.feedback {
+  margin-top: 1.1rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.feedbackHeading {
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+}
+
+.correctHeading {
+  color: var(--color-success);
+}
+
+.incorrectHeading {
+  color: var(--color-danger);
+}
+
+.actionsRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+  gap: 0.6rem;
+}
+
+.nextButton {
+  padding: 0.65rem 1.3rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.nextButton:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ---- Results ---- */
+.resultsCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.scoreValue {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.scoreLabel {
+  margin-top: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.resultsActions {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.reviewList {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-align: left;
+}
+
+.reviewItem {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.reviewItemHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.reviewOk {
+  color: var(--color-success);
+}
+
+.reviewBad {
+  color: var(--color-danger);
+}
+
+.reviewStem {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.reviewAnswer {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}

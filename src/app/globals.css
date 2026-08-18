@@ -1,0 +1,122 @@
+:root {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-surface-alt: #eef2f7;
+  --color-border: #dde3ec;
+  --color-text: #16202c;
+  --color-text-muted: #56677d;
+  --color-primary: #0f6e5c;
+  --color-primary-hover: #0b5749;
+  --color-primary-soft: #e3f3ee;
+  --color-accent: #1d4ed8;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fdeaea;
+  --color-success: #16803c;
+  --color-success-soft: #e7f6ec;
+  --color-warning: #b45309;
+  --color-warning-soft: #fdf1de;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --shadow-md: 0 4px 10px rgba(16, 24, 40, 0.08), 0 2px 6px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 12px 28px rgba(16, 24, 40, 0.12);
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1620;
+    --color-surface: #17212c;
+    --color-surface-alt: #1d2836;
+    --color-border: #2a3644;
+    --color-text: #eef2f7;
+    --color-text-muted: #9aabbe;
+    --color-primary: #34c9a3;
+    --color-primary-hover: #2fb494;
+    --color-primary-soft: rgba(52, 201, 163, 0.14);
+    --color-accent: #6d95ff;
+    --color-danger: #f27272;
+    --color-danger-soft: rgba(242, 114, 114, 0.14);
+    --color-success: #4ade80;
+    --color-success-soft: rgba(74, 222, 128, 0.14);
+    --color-warning: #f5b95c;
+    --color-warning-soft: rgba(245, 185, 92, 0.14);
+
+    color-scheme: dark;
+  }
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

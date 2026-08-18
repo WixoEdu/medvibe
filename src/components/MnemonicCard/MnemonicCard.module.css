@@ -1,0 +1,73 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.subtopic {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.cardTitle {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.keyword {
+  display: inline-block;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+
+.breakdownList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.breakdownRow {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.breakdownLetter {
+  flex-shrink: 0;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0 0.3rem;
+}
+
+.usage {
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
