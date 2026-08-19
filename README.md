@@ -25,11 +25,12 @@ Construida con **Next.js (App Router)**, **TypeScript** y **CSS Modules**.
   normales listos para consulta rápida.
 - **📚 Todo con fuente citada** — cada pregunta, flashcard, nemotecnia y
   tabla indica de dónde se obtuvo la información.
-- **👤 Cuentas de usuario opcionales** — regístrate para que tu progreso
-  (historial de quiz, cajas de flashcards, puntajes de juegos) se sincronice
-  en la nube y lo veas igual en cualquier dispositivo. Sin cuenta, la app
-  funciona igual de bien en modo invitado, guardando el progreso solo en
-  ese navegador (localStorage).
+- **👤 Cuentas de usuario obligatorias** — hay que registrarse e iniciar
+  sesión para ver y usar la app; así el progreso (historial de quiz, cajas
+  de flashcards, puntajes de juegos) queda sincronizado en la nube y se ve
+  igual en cualquier dispositivo. (Si Supabase no está configurado en un
+  despliegue, la app cae de vuelta a modo invitado con `localStorage` en
+  vez de bloquear el sitio por completo — ver [SUPABASE_SETUP.md](./SUPABASE_SETUP.md).)
 
 ## Empezar
 

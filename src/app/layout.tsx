@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
+import AuthGate from "@/components/AuthGate/AuthGate";
 import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 import styles from "./layout.module.css";
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <AuthProvider>
           <Navbar />
-          <main className={styles.main}>{children}</main>
+          <main className={styles.main}>
+            <AuthGate>{children}</AuthGate>
+          </main>
           <footer className={styles.footer}>
             <p>
               MedVibe · Material de apoyo para el Examen de Oposición Nacional de Primera Especialidad de
