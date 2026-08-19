@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ALL_QUESTIONS } from "@/content";
 import type { QuizQuestion } from "@/types/content";
 import { shuffle } from "@/lib/shuffle";
 import { useGameScores } from "@/lib/progress/useGameScores";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import styles from "./contrarreloj.module.css";
 
 const STARTING_LIVES = 3;
@@ -14,6 +15,10 @@ const SECONDS_PER_QUESTION = 15;
 type Stage = "config" | "playing" | "done";
 
 export default function ContrarrelojGame() {
+  return <ContentGate>{(content) => <ContrarrelojInner content={content} />}</ContentGate>;
+}
+
+function ContrarrelojInner({ content }: { content: ContentBundle }) {
   const [stage, setStage] = useState<Stage>("config");
   const [queue, setQueue] = useState<QuizQuestion[]>([]);
   const [qIndex, setQIndex] = useState(0);
@@ -28,7 +33,7 @@ export default function ContrarrelojGame() {
   const bestScore = useMemo(() => Math.max(0, ...scores.contrarreloj), [scores.contrarreloj]);
 
   function startGame() {
-    setQueue(shuffle(ALL_QUESTIONS));
+    setQueue(shuffle(content.questions));
     setQIndex(0);
     setLives(STARTING_LIVES);
     setScore(0);
@@ -42,7 +47,7 @@ export default function ContrarrelojGame() {
     let nextIndex = qIndex + 1;
     let nextQueue = queue;
     if (nextIndex >= queue.length) {
-      nextQueue = shuffle(ALL_QUESTIONS);
+      nextQueue = shuffle(content.questions);
       nextIndex = 0;
       setQueue(nextQueue);
     }

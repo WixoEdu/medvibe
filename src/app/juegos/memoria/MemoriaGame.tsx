@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ALL_FLASHCARDS, TOPICS } from "@/content";
 import type { TopicId } from "@/types/content";
 import { sample, shuffle } from "@/lib/shuffle";
 import { useGameScores } from "@/lib/progress/useGameScores";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import styles from "./memoria.module.css";
 
 const PAIR_COUNT = 6;
@@ -20,6 +21,10 @@ interface Tile {
 type Stage = "config" | "playing" | "done";
 
 export default function MemoriaGame() {
+  return <ContentGate>{(content) => <MemoriaInner content={content} />}</ContentGate>;
+}
+
+function MemoriaInner({ content }: { content: ContentBundle }) {
   const [stage, setStage] = useState<Stage>("config");
   const [topic, setTopic] = useState<TopicId | "todos">("todos");
   const [tiles, setTiles] = useState<Tile[]>([]);
@@ -31,8 +36,8 @@ export default function MemoriaGame() {
   const bestScore = scores.memoria.length > 0 ? Math.min(...scores.memoria) : undefined;
 
   const pool = useMemo(
-    () => (topic === "todos" ? ALL_FLASHCARDS : ALL_FLASHCARDS.filter((f) => f.topicId === topic)),
-    [topic]
+    () => (topic === "todos" ? content.flashcards : content.flashcards.filter((f) => f.topicId === topic)),
+    [content.flashcards, topic]
   );
 
   function startGame() {
@@ -107,7 +112,7 @@ export default function MemoriaGame() {
             >
               Todos los temas
             </button>
-            {TOPICS.map((t) => (
+            {content.topics.map((t) => (
               <button
                 key={t.id}
                 type="button"

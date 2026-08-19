@@ -2,22 +2,28 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ALL_FLASHCARDS, TOPICS, getTopic } from "@/content";
 import type { Flashcard, TopicId } from "@/types/content";
 import { useLeitnerState } from "@/lib/progress/useLeitnerState";
 import { boxSummary, getEntry, LEITNER_BOXES, sortByPriority } from "@/lib/leitner";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import SourceTag from "@/components/ui/SourceTag";
 import styles from "./flashcards.module.css";
 
 type Stage = "config" | "session" | "summary";
 
 export default function FlashcardsApp() {
+  return <ContentGate>{(content) => <FlashcardsInner content={content} />}</ContentGate>;
+}
+
+function FlashcardsInner({ content }: { content: ContentBundle }) {
   const searchParams = useSearchParams();
   const presetTopic = searchParams.get("tema") as TopicId | null;
+  const getTopic = (id: string) => content.topics.find((t) => t.id === id);
 
   const [stage, setStage] = useState<Stage>("config");
   const [selectedTopics, setSelectedTopics] = useState<TopicId[]>(
-    presetTopic && getTopic(presetTopic) ? [presetTopic] : TOPICS.map((t) => t.id)
+    presetTopic && getTopic(presetTopic) ? [presetTopic] : content.topics.map((t) => t.id)
   );
   const { state: leitner, review } = useLeitnerState();
 
@@ -27,8 +33,8 @@ export default function FlashcardsApp() {
   const [sessionKnew, setSessionKnew] = useState(0);
 
   const pool = useMemo(
-    () => ALL_FLASHCARDS.filter((f) => selectedTopics.includes(f.topicId)),
-    [selectedTopics]
+    () => content.flashcards.filter((f) => selectedTopics.includes(f.topicId)),
+    [content.flashcards, selectedTopics]
   );
 
   function toggleTopic(id: TopicId) {
@@ -72,7 +78,7 @@ export default function FlashcardsApp() {
           <div className={styles.fieldGroup}>
             <span className={styles.fieldLabel}>Áreas a incluir</span>
             <div className={styles.topicOptions}>
-              {TOPICS.map((topic) => {
+              {content.topics.map((topic) => {
                 const active = selectedTopics.includes(topic.id);
                 return (
                   <label

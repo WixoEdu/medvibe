@@ -1,11 +1,9 @@
-import type { ReferenceTable } from "@/types/content";
-import { getTopic } from "@/content";
+import type { ReferenceTable, Topic } from "@/types/content";
 import TopicBadge from "@/components/ui/TopicBadge";
 import SourceTag from "@/components/ui/SourceTag";
 import styles from "./TableCard.module.css";
 
-export default function TableCard({ table }: { table: ReferenceTable }) {
-  const topic = getTopic(table.topicId);
+export default function TableCard({ table, topic }: { table: ReferenceTable; topic?: Topic }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHead}>

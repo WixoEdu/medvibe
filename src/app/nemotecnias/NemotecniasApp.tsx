@@ -2,21 +2,27 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ALL_MNEMONICS, TOPICS, getTopic } from "@/content";
 import type { TopicId } from "@/types/content";
 import MnemonicCard from "@/components/MnemonicCard/MnemonicCard";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import styles from "./nemotecnias.module.css";
 
 export default function NemotecniasApp() {
+  return <ContentGate>{(content) => <NemotecniasInner content={content} />}</ContentGate>;
+}
+
+function NemotecniasInner({ content }: { content: ContentBundle }) {
   const searchParams = useSearchParams();
   const presetTopic = searchParams.get("tema") as TopicId | null;
+  const getTopic = (id: string) => content.topics.find((t) => t.id === id);
   const [filter, setFilter] = useState<TopicId | "todos">(
     presetTopic && getTopic(presetTopic) ? presetTopic : "todos"
   );
 
   const items = useMemo(
-    () => (filter === "todos" ? ALL_MNEMONICS : ALL_MNEMONICS.filter((m) => m.topicId === filter)),
-    [filter]
+    () => (filter === "todos" ? content.mnemonics : content.mnemonics.filter((m) => m.topicId === filter)),
+    [content.mnemonics, filter]
   );
 
   return (
@@ -35,9 +41,9 @@ export default function NemotecniasApp() {
           className={`${styles.pillButton} ${filter === "todos" ? styles.pillButtonActive : ""}`}
           onClick={() => setFilter("todos")}
         >
-          Todos ({ALL_MNEMONICS.length})
+          Todos ({content.mnemonics.length})
         </button>
-        {TOPICS.map((t) => (
+        {content.topics.map((t) => (
           <button
             key={t.id}
             type="button"
@@ -51,7 +57,7 @@ export default function NemotecniasApp() {
 
       <div className={styles.grid}>
         {items.map((m) => (
-          <MnemonicCard key={m.id} mnemonic={m} />
+          <MnemonicCard key={m.id} mnemonic={m} topic={getTopic(m.topicId)} />
         ))}
       </div>
     </div>
