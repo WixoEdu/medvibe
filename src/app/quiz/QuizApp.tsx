@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ALL_QUESTIONS, TOPICS, getTopic } from "@/content";
 import type { QuizQuestion, TopicId } from "@/types/content";
 import { shuffle } from "@/lib/shuffle";
 import { useQuizHistory } from "@/lib/progress/useQuizHistory";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import SourceTag from "@/components/ui/SourceTag";
 import TopicBadge from "@/components/ui/TopicBadge";
 import styles from "./quiz.module.css";
@@ -23,12 +24,17 @@ interface Answer {
 }
 
 export default function QuizApp() {
+  return <ContentGate>{(content) => <QuizInner content={content} />}</ContentGate>;
+}
+
+function QuizInner({ content }: { content: ContentBundle }) {
   const searchParams = useSearchParams();
   const presetTopic = searchParams.get("tema") as TopicId | null;
+  const getTopic = (id: string) => content.topics.find((t) => t.id === id);
 
   const [stage, setStage] = useState<Stage>("config");
   const [selectedTopics, setSelectedTopics] = useState<TopicId[]>(
-    presetTopic && getTopic(presetTopic) ? [presetTopic] : TOPICS.map((t) => t.id)
+    presetTopic && getTopic(presetTopic) ? [presetTopic] : content.topics.map((t) => t.id)
   );
   const [count, setCount] = useState(10);
   const [mode, setMode] = useState<Mode>("practica");
@@ -43,8 +49,8 @@ export default function QuizApp() {
   const { addAttempt } = useQuizHistory();
 
   const pool = useMemo(
-    () => ALL_QUESTIONS.filter((q) => selectedTopics.includes(q.topicId)),
-    [selectedTopics]
+    () => content.questions.filter((q) => selectedTopics.includes(q.topicId)),
+    [content.questions, selectedTopics]
   );
 
   function toggleTopic(id: TopicId) {
@@ -132,7 +138,7 @@ export default function QuizApp() {
           <div className={styles.fieldGroup}>
             <span className={styles.fieldLabel}>Áreas a incluir</span>
             <div className={styles.topicOptions}>
-              {TOPICS.map((topic) => {
+              {content.topics.map((topic) => {
                 const active = selectedTopics.includes(topic.id);
                 return (
                   <label

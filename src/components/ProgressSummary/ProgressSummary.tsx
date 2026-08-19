@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { useContent } from "@/contexts/ContentContext";
 import { useQuizHistory } from "@/lib/progress/useQuizHistory";
 import { useLeitnerState } from "@/lib/progress/useLeitnerState";
-import { ALL_FLASHCARDS } from "@/content";
 import { LEITNER_BOXES } from "@/lib/leitner";
 import styles from "./ProgressSummary.module.css";
 
 export default function ProgressSummary() {
   const { user, authAvailable } = useAuth();
+  const { content } = useContent();
   const { history, hydrated } = useQuizHistory();
   const { state: leitner } = useLeitnerState();
 
@@ -56,7 +57,7 @@ export default function ProgressSummary() {
           </div>
           <div className={styles.stat}>
             <div className={styles.value}>
-              {masteredCards}/{ALL_FLASHCARDS.length}
+              {masteredCards}/{content ? content.flashcards.length : "…"}
             </div>
             <div className={styles.label}>Flashcards dominadas (caja 5)</div>
           </div>

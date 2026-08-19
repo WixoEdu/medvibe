@@ -1,11 +1,9 @@
-import type { Mnemonic } from "@/types/content";
-import { getTopic } from "@/content";
+import type { Mnemonic, Topic } from "@/types/content";
 import TopicBadge from "@/components/ui/TopicBadge";
 import SourceTag from "@/components/ui/SourceTag";
 import styles from "./MnemonicCard.module.css";
 
-export default function MnemonicCard({ mnemonic }: { mnemonic: Mnemonic }) {
-  const topic = getTopic(mnemonic.topicId);
+export default function MnemonicCard({ mnemonic, topic }: { mnemonic: Mnemonic; topic?: Topic }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardHead}>

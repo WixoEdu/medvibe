@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { HANGMAN_WORDS, type HangmanWord } from "@/content/games/hangmanWords";
+import type { HangmanWord } from "@/content/games/hangmanWords";
 import SourceTag from "@/components/ui/SourceTag";
+import ContentGate from "@/components/ui/ContentGate";
+import type { ContentBundle } from "@/contexts/ContentContext";
 import styles from "./ahorcado.module.css";
 
 const MAX_WRONG = 6;
@@ -11,19 +13,23 @@ const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 type Stage = "config" | "playing" | "won" | "lost";
 
-function pickWord(excludeId?: string): HangmanWord {
-  const options = excludeId ? HANGMAN_WORDS.filter((w) => w.id !== excludeId) : HANGMAN_WORDS;
+function pickWord(words: HangmanWord[], excludeId?: string): HangmanWord {
+  const options = excludeId ? words.filter((w) => w.id !== excludeId) : words;
   return options[Math.floor(Math.random() * options.length)];
 }
 
 export default function AhorcadoGame() {
+  return <ContentGate>{(content) => <AhorcadoInner content={content} />}</ContentGate>;
+}
+
+function AhorcadoInner({ content }: { content: ContentBundle }) {
   const [stage, setStage] = useState<Stage>("config");
   const [current, setCurrent] = useState<HangmanWord | null>(null);
   const [guessed, setGuessed] = useState<Set<string>>(new Set());
   const [wrongCount, setWrongCount] = useState(0);
 
   function startGame() {
-    const word = pickWord(current?.id);
+    const word = pickWord(content.hangmanWords, current?.id);
     setCurrent(word);
     setGuessed(new Set());
     setWrongCount(0);
