@@ -5,8 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { ALL_QUESTIONS, TOPICS, getTopic } from "@/content";
 import type { QuizQuestion, TopicId } from "@/types/content";
 import { shuffle } from "@/lib/shuffle";
-import { useLocalStorage } from "@/lib/useLocalStorage";
-import { STORAGE_KEYS, type QuizAttempt } from "@/lib/storageKeys";
+import { useQuizHistory } from "@/lib/progress/useQuizHistory";
 import SourceTag from "@/components/ui/SourceTag";
 import TopicBadge from "@/components/ui/TopicBadge";
 import styles from "./quiz.module.css";
@@ -41,7 +40,7 @@ export default function QuizApp() {
   const [revealed, setRevealed] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
 
-  const [, setHistory] = useLocalStorage<QuizAttempt[]>(STORAGE_KEYS.quizHistory, []);
+  const { addAttempt } = useQuizHistory();
 
   const pool = useMemo(
     () => ALL_QUESTIONS.filter((q) => selectedTopics.includes(q.topicId)),
@@ -71,15 +70,12 @@ export default function QuizApp() {
     const correct = finalAnswers.filter(
       (a) => a.selectedIndex !== null && a.selectedIndex === a.question.correctIndex
     ).length;
-    const attempt: QuizAttempt = {
-      id: `${Date.now()}`,
-      date: Date.now(),
+    addAttempt({
       topicId: selectedTopics.length === 1 ? selectedTopics[0] : "mixto",
       total: finalAnswers.length,
       correct,
       mode,
-    };
-    setHistory((prev) => [attempt, ...prev].slice(0, 100));
+    });
     setAnswers(finalAnswers);
     setStage("results");
   }

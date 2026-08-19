@@ -25,9 +25,11 @@ Construida con **Next.js (App Router)**, **TypeScript** y **CSS Modules**.
   normales listos para consulta rápida.
 - **📚 Todo con fuente citada** — cada pregunta, flashcard, nemotecnia y
   tabla indica de dónde se obtuvo la información.
-- **Progreso local** — tu historial de quiz, tus cajas de flashcards y tus
-  mejores puntajes de juegos se guardan en el navegador (localStorage); no
-  hay backend ni cuentas.
+- **👤 Cuentas de usuario opcionales** — regístrate para que tu progreso
+  (historial de quiz, cajas de flashcards, puntajes de juegos) se sincronice
+  en la nube y lo veas igual en cualquier dispositivo. Sin cuenta, la app
+  funciona igual de bien en modo invitado, guardando el progreso solo en
+  ese navegador (localStorage).
 
 ## Empezar
 
@@ -37,6 +39,11 @@ npm run dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000).
+
+La app funciona de inmediato en modo invitado. Para habilitar cuentas de
+usuario reales (registro, login, recuperación de contraseña, progreso
+sincronizado en la nube), sigue **[SUPABASE_SETUP.md](./SUPABASE_SETUP.md)** —
+toma unos minutos y es gratis.
 
 ## Scripts
 
@@ -71,7 +78,9 @@ Facultad de Ciencias Médicas de la USAC antes de tu examen real.
 - [Next.js](https://nextjs.org) (App Router, Server Components)
 - TypeScript
 - CSS Modules (sin frameworks de utilidades)
-- Persistencia 100% en el cliente (`localStorage`), sin base de datos
+- [Supabase](https://supabase.com) para autenticación y base de datos
+  (opcional — ver [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)); sin
+  configurarlo, la app usa `localStorage` como modo invitado
 
 ## Aviso
 

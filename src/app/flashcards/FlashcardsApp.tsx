@@ -4,9 +4,8 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ALL_FLASHCARDS, TOPICS, getTopic } from "@/content";
 import type { Flashcard, TopicId } from "@/types/content";
-import { useLocalStorage } from "@/lib/useLocalStorage";
-import { STORAGE_KEYS } from "@/lib/storageKeys";
-import { boxSummary, getEntry, LEITNER_BOXES, reviewCard, sortByPriority, type LeitnerState } from "@/lib/leitner";
+import { useLeitnerState } from "@/lib/progress/useLeitnerState";
+import { boxSummary, getEntry, LEITNER_BOXES, sortByPriority } from "@/lib/leitner";
 import SourceTag from "@/components/ui/SourceTag";
 import styles from "./flashcards.module.css";
 
@@ -20,7 +19,7 @@ export default function FlashcardsApp() {
   const [selectedTopics, setSelectedTopics] = useState<TopicId[]>(
     presetTopic && getTopic(presetTopic) ? [presetTopic] : TOPICS.map((t) => t.id)
   );
-  const [leitner, setLeitner] = useLocalStorage<LeitnerState>(STORAGE_KEYS.flashcardLeitner, {});
+  const { state: leitner, review } = useLeitnerState();
 
   const [deck, setDeck] = useState<Flashcard[]>([]);
   const [index, setIndex] = useState(0);
@@ -47,7 +46,7 @@ export default function FlashcardsApp() {
   const current = deck[index];
 
   function answer(knewIt: boolean) {
-    setLeitner((prev) => reviewCard(prev, current.id, knewIt));
+    review(current.id, knewIt);
     if (knewIt) setSessionKnew((s) => s + 1);
     if (index + 1 >= deck.length) {
       setStage("summary");

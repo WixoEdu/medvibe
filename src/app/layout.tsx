@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
+import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -19,15 +20,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={inter.variable}>
       <body>
-        <Navbar />
-        <main className={styles.main}>{children}</main>
-        <footer className={styles.footer}>
-          <p>
-            MedVibe · Material de apoyo para el Examen de Oposición Nacional de Primera Especialidad de
-            Medicina (Guatemala). No sustituye las guías oficiales de la Facultad de Ciencias Médicas –
-            USAC ni la bibliografía de tu programa de estudio.
-          </p>
-        </footer>
+        <AuthProvider>
+          <Navbar />
+          <main className={styles.main}>{children}</main>
+          <footer className={styles.footer}>
+            <p>
+              MedVibe · Material de apoyo para el Examen de Oposición Nacional de Primera Especialidad de
+              Medicina (Guatemala). No sustituye las guías oficiales de la Facultad de Ciencias Médicas –
+              USAC ni la bibliografía de tu programa de estudio.
+            </p>
+          </footer>
+        </AuthProvider>
       </body>
     </html>
   );

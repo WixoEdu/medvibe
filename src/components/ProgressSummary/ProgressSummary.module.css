@@ -33,3 +33,18 @@
   border-radius: var(--radius-md);
   text-align: center;
 }
+
+.syncNote {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.syncLink {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.syncLink:hover {
+  text-decoration: underline;
+}

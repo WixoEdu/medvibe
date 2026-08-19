@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 import styles from "./Navbar.module.css";
 
 const LINKS = [
@@ -15,6 +16,14 @@ const LINKS = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, loading, signOut } = useAuth();
+
+  async function handleSignOut() {
+    await signOut();
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <header className={styles.header}>
@@ -39,6 +48,23 @@ export default function Navbar() {
             );
           })}
         </nav>
+        <div className={styles.authSection}>
+          {!loading &&
+            (user ? (
+              <>
+                <span className={styles.userEmail} title={user.email}>
+                  👤 {user.email}
+                </span>
+                <button type="button" className={styles.signOutButton} onClick={handleSignOut}>
+                  Salir
+                </button>
+              </>
+            ) : (
+              <Link href="/login" className={styles.loginButton}>
+                Iniciar sesión
+              </Link>
+            ))}
+        </div>
       </div>
     </header>
   );
