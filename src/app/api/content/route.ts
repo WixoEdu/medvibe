@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { TOPICS, ALL_QUESTIONS, ALL_FLASHCARDS, ALL_MNEMONICS, ALL_TABLES } from "@/content";
 import { HANGMAN_WORDS } from "@/content/games/hangmanWords";
+import { STUDY_PLAN } from "@/content/studyPlan";
 
 /**
  * Único punto de entrada por el que el contenido de estudio (preguntas,
@@ -58,6 +59,7 @@ export async function GET(request: Request) {
       mnemonics: ALL_MNEMONICS,
       tables: ALL_TABLES,
       hangmanWords: HANGMAN_WORDS,
+      studyPlan: STUDY_PLAN,
     },
     { headers: { "Cache-Control": "private, no-store" } }
   );

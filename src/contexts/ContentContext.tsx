@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { useAuth } from "./AuthContext";
 import { supabase } from "@/lib/supabase/client";
-import type { Topic, QuizQuestion, Flashcard, Mnemonic, ReferenceTable } from "@/types/content";
+import type { Topic, QuizQuestion, Flashcard, Mnemonic, ReferenceTable, StudyPlanDay } from "@/types/content";
 // Importar el tipo (no el arreglo de datos) es seguro: TypeScript borra los
 // `type`-imports al compilar, así que esto no mete las palabras del ahorcado
 // en el bundle del cliente.
@@ -16,6 +16,7 @@ export interface ContentBundle {
   mnemonics: Mnemonic[];
   tables: ReferenceTable[];
   hangmanWords: HangmanWord[];
+  studyPlan: StudyPlanDay[];
 }
 
 interface ContentContextValue {
