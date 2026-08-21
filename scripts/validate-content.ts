@@ -14,6 +14,7 @@
 import { TOPIC_IDS } from "../src/types/content";
 import { ALL_QUESTIONS, ALL_FLASHCARDS, ALL_MNEMONICS, ALL_TABLES } from "../src/content";
 import { HANGMAN_WORDS } from "../src/content/games/hangmanWords";
+import { STUDY_PLAN } from "../src/content/studyPlan";
 
 const VALID_TOPICS = new Set<string>(TOPIC_IDS);
 const errors: string[] = [];
@@ -104,12 +105,32 @@ for (const w of HANGMAN_WORDS) {
   }
 }
 
+// --- Plan de estudio de 15 días ---
+{
+  const seenDays = new Set<number>();
+  for (const d of STUDY_PLAN) {
+    if (seenDays.has(d.day)) errors.push(`STUDY_PLAN: día duplicado "${d.day}".`);
+    seenDays.add(d.day);
+    if (!d.title || d.title.trim().length === 0) errors.push(`STUDY_PLAN día ${d.day}: falta el título.`);
+    if (!d.goals || d.goals.length === 0) errors.push(`STUDY_PLAN día ${d.day}: falta al menos una meta.`);
+    if (!d.activities || d.activities.length === 0) errors.push(`STUDY_PLAN día ${d.day}: falta al menos una actividad.`);
+    if (!d.subtopics || d.subtopics.length === 0) errors.push(`STUDY_PLAN día ${d.day}: falta al menos un subtema.`);
+    if (!d.estimatedMinutes || d.estimatedMinutes <= 0) errors.push(`STUDY_PLAN día ${d.day}: estimatedMinutes debe ser mayor que 0.`);
+  }
+  const expectedDays = Array.from({ length: STUDY_PLAN.length }, (_, i) => i + 1);
+  const missingDays = expectedDays.filter((n) => !seenDays.has(n));
+  if (missingDays.length > 0) {
+    errors.push(`STUDY_PLAN: faltan los días ${missingDays.join(", ")} (debe ser una secuencia 1..N sin huecos).`);
+  }
+}
+
 const totals = {
   preguntas: ALL_QUESTIONS.length,
   flashcards: ALL_FLASHCARDS.length,
   nemotecnias: ALL_MNEMONICS.length,
   tablas: ALL_TABLES.length,
   ahorcado: HANGMAN_WORDS.length,
+  "días del plan": STUDY_PLAN.length,
 };
 
 if (errors.length > 0) {

@@ -29,7 +29,7 @@ function TemaInner({ slug, content }: { slug: string; content: ContentBundle }) 
   const tables = content.tables.filter((t) => t.topicId === topic.id);
   const questionCount = content.questions.filter((q) => q.topicId === topic.id).length;
   const flashcardCount = content.flashcards.filter((f) => f.topicId === topic.id).length;
-  const pct = Math.round((topic.examWeight.questions / topic.examWeight.totalQuestions) * 100);
+  const pct = topic.examWeight ? Math.round((topic.examWeight.questions / topic.examWeight.totalQuestions) * 100) : null;
 
   return (
     <div>
@@ -44,14 +44,18 @@ function TemaInner({ slug, content }: { slug: string; content: ContentBundle }) 
           <h1 className={styles.title}>{topic.name}</h1>
         </div>
         <p className={styles.description}>{topic.description}</p>
-        <div>
-          <div className={styles.weightBarTrack}>
-            <div className={styles.weightBarFill} style={{ width: `${pct}%`, background: topic.color }} />
+        {topic.examWeight && pct !== null ? (
+          <div>
+            <div className={styles.weightBarTrack}>
+              <div className={styles.weightBarFill} style={{ width: `${pct}%`, background: topic.color }} />
+            </div>
+            <p className={styles.weightLabel}>
+              ~{topic.examWeight.questions} de {topic.examWeight.totalQuestions} preguntas del examen ({pct}%)
+            </p>
           </div>
-          <p className={styles.weightLabel}>
-            ~{topic.examWeight.questions} de {topic.examWeight.totalQuestions} preguntas del examen ({pct}%)
-          </p>
-        </div>
+        ) : (
+          <p className={styles.weightLabel}>Examen de admisión — no comparte la escala de 180 preguntas del examen de residencia.</p>
+        )}
         <div className={styles.actionsRow}>
           <Link href={`/quiz?tema=${topic.id}`} className={`${styles.actionButton} ${styles.actionButtonPrimary}`}>
             📝 Practicar quiz ({questionCount})

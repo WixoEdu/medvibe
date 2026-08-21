@@ -12,6 +12,7 @@ const LINKS = [
   { href: "/juegos", label: "Juegos", icon: "🎮" },
   { href: "/nemotecnias", label: "Nemotecnias", icon: "🧠" },
   { href: "/tablas", label: "Tablas", icon: "📊" },
+  { href: "/plan-15-dias", label: "Plan 15 días", icon: "🗓️" },
 ];
 
 export default function Navbar() {

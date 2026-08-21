@@ -6,24 +6,28 @@ import { cirugiaQuestions } from "./questions/cirugia";
 import { pediatriaQuestions } from "./questions/pediatria";
 import { ginecoObstetriciaQuestions } from "./questions/gineco-obstetricia";
 import { saludPublicaQuestions } from "./questions/salud-publica";
+import { cienciasBasicasQuestions } from "./questions/ciencias-basicas";
 
 import { medicinaInternaFlashcards } from "./flashcards/medicina-interna";
 import { cirugiaFlashcards } from "./flashcards/cirugia";
 import { pediatriaFlashcards } from "./flashcards/pediatria";
 import { ginecoObstetriciaFlashcards } from "./flashcards/gineco-obstetricia";
 import { saludPublicaFlashcards } from "./flashcards/salud-publica";
+import { cienciasBasicasFlashcards } from "./flashcards/ciencias-basicas";
 
 import { medicinaInternaMnemonics } from "./mnemonics/medicina-interna";
 import { cirugiaMnemonics } from "./mnemonics/cirugia";
 import { pediatriaMnemonics } from "./mnemonics/pediatria";
 import { ginecoObstetriciaMnemonics } from "./mnemonics/gineco-obstetricia";
 import { saludPublicaMnemonics } from "./mnemonics/salud-publica";
+import { cienciasBasicasMnemonics } from "./mnemonics/ciencias-basicas";
 
 import { medicinaInternaTables } from "./tables/medicina-interna";
 import { cirugiaTables } from "./tables/cirugia";
 import { pediatriaTables } from "./tables/pediatria";
 import { ginecoObstetriciaTables } from "./tables/gineco-obstetricia";
 import { saludPublicaTables } from "./tables/salud-publica";
+import { cienciasBasicasTables } from "./tables/ciencias-basicas";
 
 export { TOPICS, getTopic } from "./topics";
 
@@ -40,6 +44,7 @@ export const ALL_QUESTIONS: QuizQuestion[] = [
   ...pediatriaQuestions,
   ...ginecoObstetriciaQuestions,
   ...saludPublicaQuestions,
+  ...cienciasBasicasQuestions,
 ];
 
 export const ALL_FLASHCARDS: Flashcard[] = [
@@ -48,6 +53,7 @@ export const ALL_FLASHCARDS: Flashcard[] = [
   ...pediatriaFlashcards,
   ...ginecoObstetriciaFlashcards,
   ...saludPublicaFlashcards,
+  ...cienciasBasicasFlashcards,
 ];
 
 export const ALL_MNEMONICS: Mnemonic[] = [
@@ -56,6 +62,7 @@ export const ALL_MNEMONICS: Mnemonic[] = [
   ...pediatriaMnemonics,
   ...ginecoObstetriciaMnemonics,
   ...saludPublicaMnemonics,
+  ...cienciasBasicasMnemonics,
 ];
 
 export const ALL_TABLES: ReferenceTable[] = [
@@ -64,6 +71,7 @@ export const ALL_TABLES: ReferenceTable[] = [
   ...pediatriaTables,
   ...ginecoObstetriciaTables,
   ...saludPublicaTables,
+  ...cienciasBasicasTables,
 ];
 
 export function questionsByTopic(topicId: string) {
