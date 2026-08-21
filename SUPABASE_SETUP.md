@@ -104,4 +104,39 @@ Con esto, en tu app desplegada:
   que impiden que un usuario lea o escriba filas de otro usuario aunque
   tenga esa clave.
 - Nunca expongas la `service_role key` en el código del frontend ni la
-  subas al repositorio.
+  subas al repositorio. MedVibe no la usa en ninguna parte: el panel de
+  administrador (ver sección 7) funciona enteramente con la `anon key` más
+  políticas RLS, no con la `service_role key`.
+
+## 7. Panel de administrador y comentarios de usuarios
+
+1. En el **SQL Editor** de Supabase, corre el contenido completo de
+   `supabase/schema-admin.sql` (después de haber corrido `schema.sql`). Es
+   aditivo — no borra ni modifica nada existente.
+2. Regístrate o inicia sesión normalmente en la app (como cualquier
+   usuario) al menos una vez, para que se cree tu fila en `profiles`.
+3. De vuelta en el SQL Editor, conviértete en administrador ejecutando:
+   ```sql
+   update public.profiles set role = 'admin' where email = 'tu-correo@ejemplo.com';
+   ```
+4. Inicia sesión (o recarga la página si ya la tenías abierta) — ahora
+   verás un enlace **"Admin"** en la barra de navegación, con:
+   - **Resumen**: usuarios totales, activos en los últimos 7/30 días,
+     precisión promedio y temas más practicados.
+   - **Usuarios**: nombre, correo, fecha de registro, última conexión,
+     número de conexiones y progreso (quiz, flashcards) de cada usuario.
+   - **Comentarios y reportes**: todo lo que los usuarios envían desde
+     `/comentarios` (comentarios generales, reportes de error de contenido
+     o de la app, y sugerencias), con estado abierto/revisado/resuelto.
+
+Ningún usuario puede volverse administrador desde la app — el `role` de
+`profiles` solo se puede cambiar manualmente desde el SQL Editor (o por
+otro administrador ya existente), y un trigger en la base de datos revierte
+cualquier intento de un usuario normal de cambiar su propio `role`.
+
+**Qué datos ve el administrador, y qué no**: nombre, correo, fecha de
+registro, fecha de última conexión, número de conexiones, y el progreso de
+estudio (intentos de quiz, flashcards repasadas, puntajes de juegos) que
+cada usuario ya genera al usar la app — nada más. No se recolecta
+ubicación, dirección IP, dispositivo, ni ningún dato de navegación fuera de
+MedVibe. Los usuarios ven este alcance explicado en `/comentarios`.
