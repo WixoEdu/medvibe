@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
-import AuthGate from "@/components/AuthGate/AuthGate";
+import AppShell from "@/components/AppShell/AppShell";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ContentProvider } from "@/contexts/ContentContext";
 import "./globals.css";
-import styles from "./layout.module.css";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -24,17 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <AuthProvider>
           <ContentProvider>
-            <Navbar />
-            <main className={styles.main}>
-              <AuthGate>{children}</AuthGate>
-            </main>
-            <footer className={styles.footer}>
-              <p>
-                MedVibe · Material de apoyo para el Examen de Oposición Nacional de Primera Especialidad de
-                Medicina (Guatemala). No sustituye las guías oficiales de la Facultad de Ciencias Médicas –
-                USAC ni la bibliografía de tu programa de estudio.
-              </p>
-            </footer>
+            <AppShell>{children}</AppShell>
           </ContentProvider>
         </AuthProvider>
       </body>
