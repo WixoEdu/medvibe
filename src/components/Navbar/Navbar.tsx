@@ -58,7 +58,7 @@ export default function Navbar() {
             (user ? (
               <>
                 <span className={styles.userEmail} title={user.email}>
-                  👤 {user.email}
+                  <span className={styles.userEmailText}>{user.email}</span>
                 </span>
                 <button type="button" className={styles.signOutButton} onClick={handleSignOut}>
                   Salir

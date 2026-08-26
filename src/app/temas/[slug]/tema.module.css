@@ -38,7 +38,7 @@
 .weightBarTrack {
   max-width: 320px;
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--color-surface-alt);
   overflow: hidden;
   margin-top: 0.4rem;
@@ -46,7 +46,7 @@
 
 .weightBarFill {
   height: 100%;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .weightLabel {
@@ -65,22 +65,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.65rem 1.05rem;
-  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 0.86rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
 }
 
 .actionButton:hover {
-  background: var(--color-surface-alt);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .actionButtonPrimary {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-primary);
 }
 
 .actionButtonPrimary:hover {

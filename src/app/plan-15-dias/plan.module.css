@@ -42,22 +42,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.65rem 1.05rem;
-  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 0.86rem;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
 }
 
 .actionButton:hover {
-  background: var(--color-surface-alt);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .actionButtonPrimary {
   background: var(--color-primary);
   color: white;
-  border-color: var(--color-primary);
 }
 
 .actionButtonPrimary:hover {
@@ -71,14 +72,14 @@
 
 .progressBarTrack {
   height: 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--color-surface-alt);
   overflow: hidden;
 }
 
 .progressBarFill {
   height: 100%;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--color-primary);
   transition: width 0.3s ease;
 }
@@ -100,15 +101,15 @@
 }
 
 .dayCard {
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1.1rem 1.25rem;
   background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .dayCardDone {
-  border-color: var(--color-primary);
-  background: var(--color-surface-alt);
+  box-shadow: var(--shadow-sm), inset 0 0 0 2px var(--color-primary);
+  background: var(--color-primary-soft);
 }
 
 .dayHead {
@@ -125,7 +126,7 @@
   color: white;
   background: var(--color-primary);
   padding: 0.15rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .dayTitle {
@@ -162,8 +163,7 @@
   font-weight: 700;
   color: var(--color-text-muted);
   background: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0.15rem 0.55rem;
 }
 
