@@ -7,6 +7,7 @@ import { translateAuthError } from "@/lib/supabase/errors";
 import styles from "../auth.module.css";
 
 export default function RegistroPage() {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,6 +33,7 @@ export default function RegistroPage() {
       email,
       password,
       options: {
+        data: { full_name: fullName.trim() || null },
         emailRedirectTo: typeof window !== "undefined" ? `${window.location.origin}/login` : undefined,
       },
     });
@@ -86,6 +88,19 @@ export default function RegistroPage() {
       )}
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="fullName">
+            Nombre completo
+          </label>
+          <input
+            id="fullName"
+            type="text"
+            autoComplete="name"
+            className={styles.input}
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </div>
         <div className={styles.field}>
           <label className={styles.label} htmlFor="email">
             Correo electrónico

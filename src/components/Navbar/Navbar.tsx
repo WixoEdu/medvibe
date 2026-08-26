@@ -18,13 +18,17 @@ const LINKS = [
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, loading, signOut } = useAuth();
+  const { user, loading, signOut, isAdmin } = useAuth();
 
   async function handleSignOut() {
     await signOut();
     router.push("/");
     router.refresh();
   }
+
+  const links = user
+    ? [...LINKS, { href: "/comentarios", label: "Comentarios", icon: "💬" }, ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: "🛠️" }] : [])]
+    : LINKS;
 
   return (
     <header className={styles.header}>
@@ -35,7 +39,7 @@ export default function Navbar() {
           <span className={styles.brandSub}>Oposición Guatemala</span>
         </Link>
         <nav className={styles.nav} aria-label="Navegación principal">
-          {LINKS.map((link) => {
+          {links.map((link) => {
             const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
             return (
               <Link
