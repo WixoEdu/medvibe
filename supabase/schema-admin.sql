@@ -101,6 +101,15 @@ create trigger on_auth_user_email_updated
 -- propia fila (la política de UPDATE de abajo permite editar tu propio
 -- full_name, pero este trigger revierte cualquier cambio de "role" que no
 -- venga de alguien que YA es admin).
+--
+-- La condición `auth.uid() is not null` es clave: solo se aplica esta
+-- protección cuando el cambio viene de una sesión de usuario autenticada
+-- vía la API (el navegador, con la anon key). Cuando corres SQL
+-- directamente en el SQL Editor de Supabase (o una migración, o el propio
+-- rol "postgres"), no hay sesión de auth — auth.uid() es NULL — así que el
+-- trigger no interfiere y el cambio de "role" se aplica normalmente. Sin
+-- esta condición, ni siquiera tú podrías promoverte a admin desde el SQL
+-- Editor.
 create or replace function public.protect_profile_role()
 returns trigger
 language plpgsql
@@ -108,7 +117,7 @@ security definer
 set search_path = public
 as $$
 begin
-  if new.role is distinct from old.role and not public.is_admin() then
+  if new.role is distinct from old.role and auth.uid() is not null and not public.is_admin() then
     new.role := old.role;
   end if;
   return new;
