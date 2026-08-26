@@ -15,7 +15,7 @@
 .subtitle {
   color: var(--color-text-muted);
   font-size: 0.92rem;
-  line-height: 1.5;
+  line-height: 1.55;
   max-width: 680px;
 }
 
@@ -23,9 +23,8 @@
   font-size: 0.78rem;
   color: var(--color-text-muted);
   background: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.9rem;
   max-width: 680px;
   line-height: 1.5;
 }
@@ -36,6 +35,10 @@
   gap: 0.9rem;
   max-width: 560px;
   margin-bottom: 2.5rem;
+  background: var(--color-surface);
+  padding: 1.4rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .field {
@@ -52,12 +55,20 @@
 .select,
 .input,
 .textarea {
-  padding: 0.6rem 0.8rem;
+  padding: 0.65rem 0.85rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface-alt);
   font-size: 0.9rem;
   font-family: inherit;
+}
+
+.select:focus,
+.input:focus,
+.textarea:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  outline: none;
 }
 
 .textarea {
@@ -67,12 +78,21 @@
 
 .submitButton {
   align-self: flex-start;
-  padding: 0.65rem 1.3rem;
-  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-pill);
   background: var(--color-primary);
   color: white;
   font-weight: 800;
   font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .submitButton:disabled {
@@ -81,16 +101,16 @@
 
 .successBox {
   font-size: 0.85rem;
-  color: #166534;
-  background: #dcfce7;
+  color: var(--color-success);
+  background: var(--color-success-soft);
   border-radius: var(--radius-sm);
   padding: 0.6rem 0.8rem;
 }
 
 .errorBox {
   font-size: 0.85rem;
-  color: #991b1b;
-  background: #fee2e2;
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
   border-radius: var(--radius-sm);
   padding: 0.6rem 0.8rem;
 }
@@ -112,10 +132,10 @@
 }
 
 .reportCard {
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.1rem;
   background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .reportHead {
@@ -132,32 +152,31 @@
   font-weight: 700;
   color: var(--color-text-muted);
   background: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-pill);
+  padding: 0.15rem 0.6rem;
 }
 
 .statusBadge {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 800;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
 }
 
 .statusAbierto {
-  background: #fee2e2;
-  color: #991b1b;
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
 }
 
 .statusRevisado {
-  background: #fef3c7;
-  color: #92400e;
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
 }
 
 .statusResuelto {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--color-success-soft);
+  color: var(--color-success);
 }
 
 .reportMeta {
@@ -168,7 +187,7 @@
 .reportMessage {
   font-size: 0.88rem;
   line-height: 1.5;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .emptyNote {

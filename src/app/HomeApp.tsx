@@ -84,7 +84,11 @@ export default function HomeApp() {
                     return (
                       <Link key={topic.id} href={`/temas/${topic.id}`} className={styles.topicCard}>
                         <div className={styles.topicCardHead}>
-                          <span className={styles.topicIcon} aria-hidden="true">
+                          <span
+                            className={styles.topicIcon}
+                            style={{ background: `${topic.color}1f`, color: topic.color }}
+                            aria-hidden="true"
+                          >
                             {topic.icon}
                           </span>
                           <span className={styles.topicName}>{topic.name}</span>
@@ -120,7 +124,11 @@ export default function HomeApp() {
                     {admissionTopics.map((topic) => (
                       <Link key={topic.id} href={`/temas/${topic.id}`} className={styles.topicCard}>
                         <div className={styles.topicCardHead}>
-                          <span className={styles.topicIcon} aria-hidden="true">
+                          <span
+                            className={styles.topicIcon}
+                            style={{ background: `${topic.color}1f`, color: topic.color }}
+                            aria-hidden="true"
+                          >
                             {topic.icon}
                           </span>
                           <span className={styles.topicName}>{topic.name}</span>
@@ -130,7 +138,7 @@ export default function HomeApp() {
                     ))}
                     <Link href="/plan-15-dias" className={styles.topicCard}>
                       <div className={styles.topicCardHead}>
-                        <span className={styles.topicIcon} aria-hidden="true">
+                        <span className={styles.topicIcon} style={{ background: "var(--color-primary-soft)", color: "var(--color-primary)" }} aria-hidden="true">
                           🗓️
                         </span>
                         <span className={styles.topicName}>Plan de estudio de 15 días</span>

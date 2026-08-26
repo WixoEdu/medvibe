@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import AuthGate from "@/components/AuthGate/AuthGate";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -7,8 +7,8 @@ import { ContentProvider } from "@/contexts/ContentContext";
 import "./globals.css";
 import styles from "./layout.module.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="es" className={jakarta.variable}>
       <body>
         <AuthProvider>
           <ContentProvider>
